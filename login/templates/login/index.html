@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Homepage{% endblock %}
+{{% block content %}
+    {% if request.session.is_login %}
+    <h1> Welcome back, {{ request.session.user_name }}!</h1>
+    {% else %}
+    <h1>You havn't logged-in, we only can show public content!</h1>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,69 @@
+{% load staticfiles %} <!--then we can use static -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="'viewport" content="width = device-width, initial-scale=1.0">
+   <!--<meta> viewport element gives the browser instructions on how to control the page's dimensions and scaling.
+
+'width=device-width' =  width of the page to follow the screen-width of the device (which will vary depending on the device).
+
+'initial-scale=1.0' = initial zoom level when the page is first loaded by the browser.-->
+
+    <!-- to get a moving title -->
+    <title>{% block title %} base {% endblock %}</title>
+
+    <!--Bootstrap-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- to have a dynamic css-->
+    {% block css %}{% endblock %}
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!--brand & toggle get group for better display-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapse" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
+                    <span class="sr-only"> Change</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">HRMS</a>
+            </div>
+
+
+        <!--collect the nav link, forms and others for toggling-->
+            <div class="collapse navbar-collapse" id="my-nav">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/index/">Homepage</a> </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.session.is_login %}
+                        <li><a href="'#"> Currently On-line: {{ request.session.user_name }}</a></li>
+                        <li><a href="/logout/">Logout</a> </li>
+                    {% else %}
+                        <li><a href="/login">Login </a> </li>
+                        <li><a href="/register/">Register</a> </li>
+                    {% endif %}
+                </ul>
+            </div> <!-- navbar-collapse-->
+        </div><!-- container fluid-->
+
+    </nav>
+
+    <!--for future content need-->
+    {% block content %}{% endblock %}
+
+    <!-- jQuery library-->
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+
+    <!--include all comiled plugins// latest complied JS-->
+    <script src="{% static  'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>
